@@ -47,21 +47,21 @@ const Login = () => {
   };
   return (
     <div>
-      <section class="bg-[#f3f3f3]">
-        <div class="container px-6 py-24 mx-auto lg:py-32 ">
-          <div class="lg:flex">
-            <div class="lg:w-1/2 flex items-center justify-center">
-              <img class="w-3/4 " src={loginImage} alt="" />
+      <section className="md:py-20 md:px-10">
+        <div className="container px-6 py-24 mx-auto lg:py-32 bg-[#f3f3f3] shadow-2xl">
+          <div className="lg:flex">
+            <div className="lg:w-1/2 flex items-center justify-center">
+              <img className="w-3/4 " src={loginImage} alt="" />
             </div>
 
-            <div class="mt-8 lg:w-1/2 lg:mt-0 lg:flex lg:justify-center lg:items-center flex-col border py-5">
+            <div className="mt-8 lg:w-1/2 lg:mt-0 lg:flex lg:justify-center lg:items-center flex-col border px-3 py-5">
               <h2 className="text-black font-bold text-4xl mb-10">Login</h2>
-              <form onSubmit={handleSubmit} class="w-full lg:max-w-xl">
-                <div class="relative flex items-center">
-                  <span class="absolute">
+              <form onSubmit={handleSubmit} className="w-full lg:max-w-xl">
+                <div className="relative flex items-center">
+                  <span className="absolute">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-6 h-6 mx-3 text-gray-300"
+                      className="w-6 h-6 mx-3 text-gray-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -78,16 +78,16 @@ const Login = () => {
                   <input
                     name="email"
                     type="email"
-                    class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11  focus:border-orange-400  focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11  focus:border-orange-400  focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="Email address"
                   />
                 </div>
 
-                <div class="relative flex items-center mt-4">
-                  <span class="absolute">
+                <div className="relative flex items-center mt-4">
+                  <span className="absolute">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-6 h-6 mx-3 text-gray-300"
+                      className="w-6 h-6 mx-3 text-gray-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -104,7 +104,7 @@ const Login = () => {
                   <input
                     name="password"
                     type="password"
-                    class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg  focus:border-orange-400  focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg  focus:border-orange-400  focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="Password"
                   />
                 </div>
@@ -113,11 +113,11 @@ const Login = () => {
                   <LoadCanvasTemplate />
                 </div>
 
-                <div class="relative flex items-center mt-4">
-                  <span class="absolute">
+                <div className="relative flex items-center mt-4">
+                  <span className="absolute">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-6 h-6 mx-3 text-gray-300"
+                      className="w-6 h-6 mx-3 text-gray-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -136,21 +136,21 @@ const Login = () => {
                     name="captcha"
                     value={userCaptchaValue}
                     onChange={handleInputChange}
-                    class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg  focus:border-orange-400  focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg  focus:border-orange-400  focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="type the captcha"
                   />
                 </div>
 
-                <div class="mt-8 md:flex md:items-center">
+                <div className="mt-8 md:flex md:items-center">
                   <input
                     type="submit"
                     value="Signin"
-                    class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-orange-500 rounded-lg md:w-1/2 hover:bg-orange-400 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-50"
+                    className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-orange-500 rounded-lg md:w-1/2 hover:bg-orange-400 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-50"
                   />
 
                   <a
                     href="#"
-                    class="inline-block mt-4 text-center text-orange-500 md:mt-0 md:mx-6 hover:underline dark:text-orange-400"
+                    className="inline-block mt-4 text-center text-orange-500 md:mt-0 md:mx-6 hover:underline dark:text-orange-400"
                   >
                     Forgot your password?
                   </a>
@@ -165,18 +165,18 @@ const Login = () => {
             </div>
           </div>
 
-          <div class="mt-8 md:mt-24 sm:flex sm:items-center">
-            <h3 class="text-orange-500 dark:text-orange-400 sm:w-1/2">
+          <div className="mt-8 md:mt-24 sm:flex sm:items-center">
+            <h3 className="text-orange-500 dark:text-orange-400 sm:w-1/2">
               Social networks
             </h3>
 
-            <div class="flex items-center mt-4 sm:mt-0 -mx-1.5 sm:w-1/2">
+            <div className="flex items-center mt-4 sm:mt-0 -mx-1.5 sm:w-1/2">
               <a
-                class="mx-1.5  text-gray-400 transition-colors duration-300 transform hover:text-orange-500"
+                className="mx-1.5  text-gray-400 transition-colors duration-300 transform hover:text-orange-500"
                 href="#"
               >
                 <svg
-                  class="w-10 h-10 fill-current"
+                  className="w-10 h-10 fill-current"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -186,11 +186,11 @@ const Login = () => {
               </a>
 
               <a
-                class="mx-1.5  text-gray-400 transition-colors duration-300 transform hover:text-orange-500"
+                className="mx-1.5  text-gray-400 transition-colors duration-300 transform hover:text-orange-500"
                 href="#"
               >
                 <svg
-                  class="w-8 h-8"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -211,11 +211,11 @@ const Login = () => {
               </a>
 
               <a
-                class="mx-1.5  text-gray-400 transition-colors duration-300 transform hover:text-orange-500"
+                className="mx-1.5  text-gray-400 transition-colors duration-300 transform hover:text-orange-500"
                 href="#"
               >
                 <svg
-                  class="w-8 h-8"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -228,11 +228,11 @@ const Login = () => {
               </a>
 
               <a
-                class="mx-1.5  text-gray-400 transition-colors duration-300 transform hover:text-orange-500"
+                className="mx-1.5  text-gray-400 transition-colors duration-300 transform hover:text-orange-500"
                 href="#"
               >
                 <svg
-                  class="w-8 h-8"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
