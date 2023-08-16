@@ -1,25 +1,79 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
+  const { user, userLogout } = useContext(AuthContext);
+  const handleLogout = () => {
+    userLogout()
+      .then(() => {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: `Logout successfully`,
+        });
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
   const navOptions = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link className="uppercase text-white hover:text-orange-600" to="/">
+          Home
+        </Link>
       </li>
       <li>
-        <Link to="/menu">Our Menu</Link>
+        <Link className="uppercase text-white hover:text-orange-600" to="/menu">
+          Our Menu
+        </Link>
       </li>
       <li>
-        <Link to="/order/salads">Order Food</Link>
+        <Link
+          className="uppercase text-white hover:text-orange-600"
+          to="/order/salads"
+        >
+          Order Food
+        </Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link
+          className="uppercase text-white hover:text-orange-600"
+          to="/secret"
+        >
+          Secret
+        </Link>
       </li>
-      <li>
+      {user ? (
+        <>
+          <li onClick={handleLogout}>
+            <Link className="uppercase text-white hover:text-orange-600">
+              sign out
+            </Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link
+              className="uppercase text-white hover:text-orange-600"
+              to="/login"
+            >
+              Sign in
+            </Link>
+          </li>
+        </>
+      )}
+
+      {/* <li>
         <Link to="/create-user">SignUP</Link>
-      </li>
+      </li> */}
     </>
   );
+
   return (
     <>
       <div className="navbar fixed bg-black bg-opacity-30 z-10 max-w-screen-xl text-white">
@@ -54,7 +108,12 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <button className=" relative">
+            <FaShoppingCart className="w-9 h-9 " />
+            <div className="badge badge-secondary absolute top-5 -right-3 w-4 h-4 p-3 text-center">
+              +0
+            </div>
+          </button>
         </div>
       </div>
     </>

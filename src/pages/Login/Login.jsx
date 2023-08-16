@@ -5,17 +5,18 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImage from "../../assets/others/login.png";
+import Swal from "sweetalert2";
+
 const Login = () => {
-  const [userCaptchaValue, setUserCaptchaValue] = useState("");
   const { userLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleInputChange = (event) => {
-    const newValue = event.target.value;
+  const from = location?.state?.from?.pathname || "/";
 
-    setUserCaptchaValue(newValue);
-  };
+  console.log("Location", location, "from : ", from);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -27,23 +28,25 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-
-    userLogin(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const userCaptchaValue = form.captcha.value;
 
     if (validateCaptcha(userCaptchaValue)) {
-      alert("Captcha Matched");
+      userLogin(email, password)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+          navigate(from, { replace: true });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     } else {
-      alert("Captcha not matched");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Captcha doesn't match",
+      });
     }
-
-    console.log(email, password);
   };
   return (
     <div>
@@ -134,8 +137,7 @@ const Login = () => {
                   <input
                     type="text"
                     name="captcha"
-                    value={userCaptchaValue}
-                    onChange={handleInputChange}
+                    // onBlur={handleInputChange}
                     className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg  focus:border-orange-400  focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="type the captcha"
                   />
@@ -144,7 +146,7 @@ const Login = () => {
                 <div className="mt-8 md:flex md:items-center">
                   <input
                     type="submit"
-                    value="Signin"
+                    value="SignIn"
                     className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-orange-500 rounded-lg md:w-1/2 hover:bg-orange-400 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-50"
                   />
 
