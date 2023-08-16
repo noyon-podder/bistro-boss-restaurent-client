@@ -46,6 +46,7 @@ const Login = () => {
         title: "Oops...",
         text: "Captcha doesn't match",
       });
+      form.captcha.reset();
     }
   };
   return (

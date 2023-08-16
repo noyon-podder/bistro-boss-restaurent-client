@@ -13,7 +13,6 @@ const Order = () => {
   const categories = ["salads", "pizza", "soups", "desserts", "drinks"];
   const { category } = useParams();
   const initialCategory = categories.indexOf(category);
-  console.log(initialCategory);
   const [tabIndex, setTabIndex] = useState(initialCategory);
 
   const dessert = useFilterCategory("dessert");

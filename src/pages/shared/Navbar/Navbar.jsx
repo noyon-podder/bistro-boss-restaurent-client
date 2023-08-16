@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
   const { user, userLogout } = useContext(AuthContext);
+  const [cart] = useCart();
+
+  console.log(cart);
+
   const handleLogout = () => {
     userLogout()
       .then(() => {
@@ -108,12 +113,14 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
-          <button className=" relative">
-            <FaShoppingCart className="w-9 h-9 " />
-            <div className="badge badge-secondary absolute top-5 -right-3 w-4 h-4 p-3 text-center">
-              +0
-            </div>
-          </button>
+          <Link to="/">
+            <button className=" relative">
+              <FaShoppingCart className="w-9 h-9 " />
+              <div className="badge badge-secondary absolute top-5 -right-3 w-4 h-4 p-3 text-center">
+                +{cart?.length || 0}
+              </div>
+            </button>
+          </Link>
         </div>
       </div>
     </>
