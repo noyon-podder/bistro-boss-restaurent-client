@@ -47,9 +47,9 @@ const Navbar = () => {
       <li>
         <Link
           className="uppercase text-white hover:text-orange-600"
-          to="/secret"
+          to="/dashboard"
         >
-          Secret
+          Dashboard
         </Link>
       </li>
       {user ? (
