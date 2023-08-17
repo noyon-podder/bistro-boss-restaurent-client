@@ -44,16 +44,17 @@ const Navbar = () => {
           Order Food
         </Link>
       </li>
-      <li>
-        <Link
-          className="uppercase text-white hover:text-orange-600"
-          to="/dashboard"
-        >
-          Dashboard
-        </Link>
-      </li>
+
       {user ? (
         <>
+          <li>
+            <Link
+              className="uppercase text-white hover:text-orange-600"
+              to="/dashboard"
+            >
+              Dashboard
+            </Link>
+          </li>
           <li onClick={handleLogout}>
             <Link className="uppercase text-white hover:text-orange-600">
               sign out
@@ -113,7 +114,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
-          <Link to="/">
+          <Link to="/dashboard/my-cart" className="pr-5">
             <button className=" relative">
               <FaShoppingCart className="w-9 h-9 " />
               <div className="badge badge-secondary absolute top-5 -right-3 w-4 h-4 p-3 text-center">

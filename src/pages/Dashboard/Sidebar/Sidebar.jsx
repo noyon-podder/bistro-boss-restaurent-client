@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "../../../layout/dashboardLayout/DashboardLayout.css";
 import {
-  FaTh,
+  FaCalendarAlt,
   FaBars,
-  FaUserAlt,
-  FaRegChartBar,
-  FaCommentAlt,
+  FaEnvelope,
   FaShoppingBag,
-  FaThList,
+  FaHome,
+  FaShoppingCart,
 } from "react-icons/fa";
-import { DiTechcrunch } from "react-icons/di";
-import { NavLink } from "react-router-dom";
+import { GiWallet } from "react-icons/gi";
+import { MdReviews } from "react-icons/md";
+import { TbBrandBooking } from "react-icons/tb";
+import { AiOutlineMenuFold } from "react-icons/ai";
+import { Link, NavLink } from "react-router-dom";
+import useCart from "../../../hooks/useCart";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
+  const [cart] = useCart();
   useEffect(() => {
     const isMobileDevice =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -27,45 +31,34 @@ const Sidebar = () => {
   }, []);
   const menuItem = [
     {
-      path: "/dashboard/service",
-      name: "Manage Service",
-      icon: <FaRegChartBar />,
-    },
-    {
-      path: "/dashboard/user",
-      name: "Manage User",
-      icon: <FaTh />,
-    },
-    {
-      path: "/dashboard/technology",
-      name: "Technology & Courses",
-      icon: <DiTechcrunch />,
-    },
-    {
-      path: "/dashboard/video-upload",
-      name: "Manage Videos",
-      icon: <FaCommentAlt />,
-    },
-    {
-      path: "/dashboard/orders",
-      name: "Manage Order",
-      icon: <FaShoppingBag />,
-    },
-
-    {
       path: "/",
-      name: "Home Page",
-      icon: <FaThList />,
+      name: "User Home",
+      icon: <FaHome />,
     },
     {
-      path: "/profile",
-      name: "Profile",
-      icon: <FaUserAlt />,
+      path: "reservation",
+      name: "Reservation",
+      icon: <FaCalendarAlt />,
     },
     {
-      path: "/logout",
-      name: "Logout",
-      icon: <FaShoppingBag />,
+      path: "payment-history",
+      name: "Payment History",
+      icon: <GiWallet />,
+    },
+    {
+      path: "my-cart",
+      name: "Add to Cart",
+      icon: <FaShoppingCart />,
+    },
+    {
+      path: "review",
+      name: "Add Review",
+      icon: <MdReviews />,
+    },
+    {
+      path: "booking",
+      name: "Add Booking",
+      icon: <TbBrandBooking />,
     },
   ];
   return (
@@ -87,7 +80,7 @@ const Sidebar = () => {
               <FaBars onClick={toggle} />
             </div>
           </div>
-          <div className="mt-3">
+          <div className="my-3">
             {menuItem.map((item, index) => (
               <NavLink
                 to={item.path}
@@ -104,6 +97,65 @@ const Sidebar = () => {
                 </div>
               </NavLink>
             ))}
+          </div>
+          <hr />
+          <div className="mt-4">
+            <div className="flex items-center pl-4 mb-4">
+              <div>
+                {" "}
+                <FaHome />
+              </div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="link_text"
+              >
+                <Link to="/" className="ml-4">
+                  Home
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center pl-4 mb-4">
+              <div>
+                {" "}
+                <AiOutlineMenuFold />
+              </div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="link_text"
+              >
+                <Link to="/menu" className="ml-4">
+                  Menu
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center pl-4 mb-4">
+              <div>
+                {" "}
+                <FaShoppingBag />
+              </div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="link_text"
+              >
+                <Link to="/order" className="ml-4">
+                  Shop
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center pl-4 mb-4">
+              <div>
+                {" "}
+                <FaEnvelope />
+              </div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="link_text"
+              >
+                <Link to="/contact" className="ml-4">
+                  Contact
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -19,10 +19,11 @@
   transition: all 0.5s;
 }
 /* dashboard navbar   */
-.main-dashboard-container {
+/* .main-dashboard-container {
   padding: 20px;
   padding-right: 0;
-}
+  padding-left: 0;
+} */
 .dashboard-navbar {
   background-color: #fff;
   width: 100%;
@@ -119,11 +120,11 @@
 }
 .icon,
 .link_text {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .action-icon {
-  font-size: 16px;
+  font-size: 18px;
   padding: 3px 6px;
   text-align: center;
   cursor: pointer;
@@ -158,6 +159,7 @@
 
   .top_section {
     padding: 20px 0;
+    padding-bottom: 24px;
   }
   .dashboard-link {
     padding-top: 10px;

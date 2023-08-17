@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
     handleSubmit,
@@ -19,38 +20,52 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
+    const userInfo = {
+      email: data.email,
+      name: data.name,
+      photoURL: data.photoURL,
+    };
     createUser(data.email, data.password)
       .then((result) => {
+        const createUser = result.user;
+        console.log(createUser);
+
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            const user = result.user;
-            Swal.fire({
-              title: `${user?.displayName} account create successfully!`,
-              showClass: {
-                popup: "animate__animated animate__fadeInDown",
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
               },
-              hideClass: {
-                popup: "animate__animated animate__fadeOutUp",
-              },
-            });
-            reset();
+              body: JSON.stringify(userInfo),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  reset();
+                  Swal.fire({
+                    title: `${user?.displayName} account create successfully!`,
+                    showClass: {
+                      popup: "animate__animated animate__fadeInDown",
+                    },
+                    hideClass: {
+                      popup: "animate__animated animate__fadeOutUp",
+                    },
+                  });
+                }
+              });
+
             navigate("/");
           })
           .catch((error) => {
-            console.log(error);
+            setErrorMessage(error.message);
           });
       })
       .catch((error) => {
-        console.log(error);
+        setErrorMessage(error.message);
       });
-    console.log(data);
   };
 
-  // console.log(watch("example"));
-
-  /*
-   *programming hero mir vai r video complete korte hobe
-   */
   return (
     <div>
       <section className="md:py-5 md:px-10 lg:h-screen">
@@ -68,6 +83,11 @@ const SignUp = () => {
                 onSubmit={handleSubmit(onSubmit)}
                 className="w-full lg:max-w-xl"
               >
+                {errorMessage && (
+                  <p className="text-center mb-4 text-red-700 text-xl font-semibold">
+                    {errorMessage}
+                  </p>
+                )}
                 <div className="relative flex items-center">
                   <span className="absolute">
                     <AiOutlineUser className="w-6 h-6 mx-3 text-gray-300" />
