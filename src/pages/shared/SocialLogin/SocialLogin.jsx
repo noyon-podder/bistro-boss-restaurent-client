@@ -17,7 +17,6 @@ const SocialLogin = () => {
         const googleUserInfo = {
           name: loggedInUser.displayName,
           email: loggedInUser.email,
-          photoURL: loggedInUser.photoURL,
         };
 
         fetch("http://localhost:5000/users", {

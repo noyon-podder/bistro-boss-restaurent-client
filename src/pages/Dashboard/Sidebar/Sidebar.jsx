@@ -7,15 +7,20 @@ import {
   FaShoppingBag,
   FaHome,
   FaShoppingCart,
+  FaUsers,
 } from "react-icons/fa";
 import { GiWallet } from "react-icons/gi";
 import { MdReviews } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
 import { AiOutlineMenuFold } from "react-icons/ai";
+import { ImSpoonKnife } from "react-icons/im";
+import { FiUsers } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
 
 const Sidebar = () => {
+  //TODO: sidebar menu conditionally dynamic render to basis on isAdmin
+  const isAdmin = true;
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
   const [cart] = useCart();
@@ -31,7 +36,7 @@ const Sidebar = () => {
   }, []);
   const menuItem = [
     {
-      path: "/",
+      path: "user",
       name: "User Home",
       icon: <FaHome />,
     },
@@ -47,18 +52,46 @@ const Sidebar = () => {
     },
     {
       path: "my-cart",
-      name: "Add to Cart",
+      name: "My Cart",
       icon: <FaShoppingCart />,
     },
     {
-      path: "review",
+      path: "add-review",
       name: "Add Review",
       icon: <MdReviews />,
     },
     {
-      path: "booking",
+      path: "add-booking",
       name: "Add Booking",
       icon: <TbBrandBooking />,
+    },
+  ];
+
+  const adminMenuItem = [
+    {
+      path: "admin",
+      name: "Admin Home",
+      icon: <FaHome />,
+    },
+    {
+      path: "add-item",
+      name: "Add Items",
+      icon: <ImSpoonKnife />,
+    },
+    {
+      path: "items",
+      name: "Manage Items",
+      icon: <AiOutlineMenuFold />,
+    },
+    {
+      path: "bookings",
+      name: "Manage Bookings",
+      icon: <TbBrandBooking />,
+    },
+    {
+      path: "all-users",
+      name: "All Users",
+      icon: <FaUsers />,
     },
   ];
   return (
@@ -80,24 +113,53 @@ const Sidebar = () => {
               <FaBars onClick={toggle} />
             </div>
           </div>
-          <div className="my-3">
-            {menuItem.map((item, index) => (
-              <NavLink
-                to={item.path}
-                key={index}
-                className="dashboard-link hover:text-[#506fd9]"
-                activeclassName="active"
-              >
-                <div className="icon">{item.icon}</div>
-                <div
-                  style={{ display: isOpen ? "block" : "none" }}
-                  className="link_text"
-                >
-                  {item.name}
-                </div>
-              </NavLink>
-            ))}
-          </div>
+
+          {isAdmin ? (
+            <>
+              {/* admin pages  */}
+              <div className="my-3">
+                {adminMenuItem.map((item, index) => (
+                  <NavLink
+                    to={item.path}
+                    key={index}
+                    className="dashboard-link hover:text-[#506fd9]"
+                    activeclassName="active"
+                  >
+                    <div className="icon">{item.icon}</div>
+                    <div
+                      style={{ display: isOpen ? "block" : "none" }}
+                      className="link_text"
+                    >
+                      {item.name}
+                    </div>
+                  </NavLink>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Normal user pages  */}
+              <div className="my-3">
+                {menuItem.map((item, index) => (
+                  <NavLink
+                    to={item.path}
+                    key={index}
+                    className="dashboard-link hover:text-[#506fd9]"
+                    activeclassName="active"
+                  >
+                    <div className="icon">{item.icon}</div>
+                    <div
+                      style={{ display: isOpen ? "block" : "none" }}
+                      className="link_text"
+                    >
+                      {item.name}
+                    </div>
+                  </NavLink>
+                ))}
+              </div>
+            </>
+          )}
+
           <hr />
           <div className="mt-4">
             <div className="flex items-center pl-4 mb-4">

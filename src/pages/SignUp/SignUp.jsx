@@ -23,7 +23,6 @@ const SignUp = () => {
     const userInfo = {
       email: data.email,
       name: data.name,
-      photoURL: data.photoURL,
     };
     createUser(data.email, data.password)
       .then((result) => {
