@@ -17,10 +17,12 @@ import { ImSpoonKnife } from "react-icons/im";
 import { FiUsers } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Sidebar = () => {
   //TODO: sidebar menu conditionally dynamic render to basis on isAdmin
-  const isAdmin = true;
+
+  const [isAdmin] = useAdmin();
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
   const [cart] = useCart();

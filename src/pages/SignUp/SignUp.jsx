@@ -6,9 +6,10 @@ import bgImage from "../../assets/others/bg.png";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const {
     register,

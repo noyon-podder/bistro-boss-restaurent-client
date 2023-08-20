@@ -3,20 +3,17 @@ import { Helmet } from "react-helmet-async";
 import { FaRegEdit, FaTrash, FaUserShield } from "react-icons/fa";
 import profileImage from "../../../../assets/others/profile.png";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const AllUser = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
-    return res.json();
+    const res = await axiosSecure.get(`/users`);
+    return res.data;
   });
 
   const handleMakeAdmin = (user) => {
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
+    fetch(`${import.meta.env.VITE_SERVER_URL}/users/admin/${user._id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
@@ -34,7 +31,7 @@ const AllUser = () => {
   };
 
   const handleUserDelete = (user) => {
-    fetch(`http://localhost:5000/users/${user?._id}`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/users/${user?._id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

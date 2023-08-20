@@ -5,7 +5,6 @@ import Menu from "../pages/Menu/Menu/Menu";
 import Order from "../pages/order/order/Order";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
-import Secret from "../pages/shared/Secret/Secret";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layout/dashboardLayout/DashboardLayout";
 
@@ -20,6 +19,7 @@ import ManageItems from "../pages/Dashboard/AdminPages/ManageItems/ManageItems";
 import ManageBookings from "../pages/Dashboard/AdminPages/ManageBookings/ManageBookings";
 import AdminHome from "../pages/Dashboard/AdminPages/AdminHome/AdminHome";
 import MyCart from "../pages/Dashboard/NoramalUserPages/MyCart/MyCart";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -92,11 +92,20 @@ export const router = createBrowserRouter([
       },
       {
         path: "items",
-        element: <ManageItems />,
+        element: (
+          <AdminRoute>
+            <ManageItems />
+          </AdminRoute>
+        ),
       },
       {
         path: "bookings",
-        element: <ManageBookings />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <ManageBookings />
+          </AdminRoute>
+        ),
       },
       {
         path: "admin",
