@@ -13,7 +13,12 @@ const AllUser = () => {
   });
 
   const handleMakeAdmin = (user) => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}/users/admin/${user._id}`)
+    fetch(`${import.meta.env.VITE_SERVER_URL}/users/admin/${user._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

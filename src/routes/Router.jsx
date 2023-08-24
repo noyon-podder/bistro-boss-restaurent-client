@@ -20,6 +20,7 @@ import ManageBookings from "../pages/Dashboard/AdminPages/ManageBookings/ManageB
 import AdminHome from "../pages/Dashboard/AdminPages/AdminHome/AdminHome";
 import MyCart from "../pages/Dashboard/NoramalUserPages/MyCart/MyCart";
 import AdminRoute from "./AdminRoute";
+import UpdateItems from "../components/UpdateItems/UpdateItems";
 
 export const router = createBrowserRouter([
   {
@@ -88,15 +89,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "add-item",
-        element: <AddItems />,
+        element: (
+          <AdminRoute>
+            <AddItems />
+          </AdminRoute>
+        ),
       },
       {
         path: "items",
-        element: (
-          <AdminRoute>
-            <ManageItems />
-          </AdminRoute>
-        ),
+        element: <ManageItems />,
       },
       {
         path: "bookings",
@@ -109,7 +110,21 @@ export const router = createBrowserRouter([
       },
       {
         path: "admin",
-        element: <AdminHome />,
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "items/update/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItems />
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
     ],
   },

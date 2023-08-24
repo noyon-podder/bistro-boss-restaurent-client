@@ -4,7 +4,9 @@ import MenuItem from "../../shared/menuItem/MenuItem";
 import useMenu from "../../../hooks/useMenu";
 
 const PopularMenu = () => {
+  //TODO: get a error when use the react query to fetch data.
   const [menu] = useMenu();
+
   const popularItems = menu.filter((item) => item.category === "popular");
 
   return (

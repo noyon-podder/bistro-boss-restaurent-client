@@ -4,10 +4,12 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, userLogout } = useContext(AuthContext);
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
 
   console.log(cart);
 
@@ -47,14 +49,29 @@ const Navbar = () => {
 
       {user ? (
         <>
-          <li>
-            <Link
-              className="uppercase text-white hover:text-orange-600"
-              to="/dashboard"
-            >
-              Dashboard
-            </Link>
-          </li>
+          {isAdmin ? (
+            <>
+              <li>
+                <Link
+                  className="uppercase text-white hover:text-orange-600"
+                  to="/dashboard/admin"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link
+                  className="uppercase text-white hover:text-orange-600"
+                  to="/dashboard/user"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            </>
+          )}
           <li onClick={handleLogout}>
             <Link className="uppercase text-white hover:text-orange-600">
               sign out
